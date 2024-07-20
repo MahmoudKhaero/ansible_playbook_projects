@@ -1,0 +1,22 @@
+---
+- name: Uninstall Apache HTTP Server from Ubuntu
+  hosts: ubuntu1  # Replace with your host group or specific host
+
+  tasks:
+    - name: Stop Apache service if running
+      become: true
+      service:
+        name: apache2
+        state: stopped
+
+    - name: Uninstall Apache package
+      become: true
+      apt:
+        name: apache2
+        state: absent
+
+    - name: Ensure Apache service is disabled on boot
+      become: true
+      service:
+        name: apache2
+        enabled: no

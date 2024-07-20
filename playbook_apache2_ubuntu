@@ -1,0 +1,10 @@
+---
+- name: Install Apache HTTP Server
+  hosts: ubuntu1  # Replace with your host group or specific hosts
+
+  tasks:
+    - name: Install Apache2
+      become: true
+      apt:
+        name: apache2
+        state: present

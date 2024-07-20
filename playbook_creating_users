@@ -1,0 +1,16 @@
+---
+ - name: creating users
+   hosts: ubuntu1
+   become: true
+
+   tasks: 
+   - name: create users
+     user:
+      name: "{{ item.name }}"
+      comment: "{{ item.fname }}"
+      shell: /bin/bash
+     loop:
+     - {name: mahmoud, fname: Mahmoud Khairy }
+     - {name: mohamed, fname: Mohamed Yousef }
+     - {name: islam, fname: Islam Reda }
+

@@ -1,0 +1,28 @@
+---
+- name: Uninstall Apache HTTP Server
+  hosts: centos1
+  become: yes
+
+  tasks:
+    - name: Stop Apache service
+      systemd:
+        name: httpd
+        state: stopped
+
+    - name: Remove Apache packages
+      package:
+        name: httpd
+        state: absent
+
+    - name: Remove Apache configuration directories
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - /etc/httpd/
+        - /var/www/html/
+
+    - name: Clean up dependencies
+      yum:
+        name: '*httpd*'
+        state: absent

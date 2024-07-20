@@ -1,0 +1,16 @@
+---
+- name: Install Apache HTTP Server
+  hosts: [centos1, ubuntu1]  # Replace with your host group or specific hosts
+  vars_files:
+    - "{{ ansible_facts.os_family }}.yml"
+
+  tasks:
+    - name: Print OS family
+      debug:
+        var: ansible_facts.os_family
+
+    - name: Install Apache2
+      become: true
+      package:
+        name: "{{ apache_package }}"
+        state: present

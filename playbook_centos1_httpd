@@ -1,0 +1,12 @@
+---
+- name: install httpd in centos
+  hosts: centos1
+  become: true
+
+  tasks:
+    - name: Install Packages
+      yum:
+        name:
+          - httpd
+        state: present
+

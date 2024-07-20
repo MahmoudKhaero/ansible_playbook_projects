@@ -1,0 +1,19 @@
+---
+- name: Install Apache HTTP Server
+  hosts: ubuntu1  # Replace with your host or host group
+
+  tasks:
+    - name: Install Apache2
+      become: true
+      package:
+        name: apache2
+        state: latest
+      notify: Restart Apache
+
+  handlers:
+    - name: Restart Apache
+      become: true
+      service:
+        name: apache2
+        state: restarted
+
